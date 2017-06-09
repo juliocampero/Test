@@ -24,6 +24,30 @@
 				// Setup an event listener that calls receiveMessage() when the window
 				// receives a new MessageEvent.
 				window.addEventListener('message', receiveMessage);
+				
+				
+				
+				
+				var receiver = document.getElementById('receiver').contentWindow;
+
+				    // Get a reference to the 'Send Message' button.
+				    var btn = document.getElementById('send');
+
+				    // A function to handle sending messages.
+				    function sendMessage(e) {
+					// Prevent any default browser behaviour.
+					e.preventDefault();
+
+					// Send a message with the text 'Hello Treehouse!' to the receiver window.
+					//receiver.postMessage('Hello Julito!', 'http://localhost/cross/');
+					    console.log("sending message");
+					    receiver.postMessage('Hello Julito!', 'https://mirkotv.github.io');
+
+				    }
+
+				    // Add an event listener that will execute the sendMessage() function
+				    // when the send button is clicked.
+				    btn.addEventListener('click', sendMessage);
 			}
 		</script>
 	</header>
@@ -33,5 +57,12 @@
 			This document is on the domain: http://localhost/Receiver.html
 		</p>
 		<div id="message"></div>
+		
+		 <p>
+		    <button id="send">Send Message</button>
+		    </p>
+		
+		<iframe id="receiver" src="https:localhost" width="500" height="200">
+		</iframe>
 	</body>
 </html>
