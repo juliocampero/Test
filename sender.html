@@ -15,6 +15,7 @@
 
                 // Send a message with the text 'Hello Treehouse!' to the receiver window.
                 //receiver.postMessage('Hello Julito!', 'http://localhost/cross/');
+		    console.log("sending message");
 		    receiver.postMessage('Hello Julito!', 'https://mirkotv.github.io');
 		    
             }
@@ -34,7 +35,8 @@
     <button id="send">Send Message</button>
     </p>
 
-    <iframe id="receiver" src="https://mirkotv.github.io/Test/" width="500" height="200">
+    <!--<iframe id="receiver" src="https://mirkotv.github.io/Test/" width="500" height="200">-->
+    <iframe id="receiver" src="https:localhost" width="500" height="200">
     <p>Your browser does not support iframes.</p>
     </iframe>
 </body>
