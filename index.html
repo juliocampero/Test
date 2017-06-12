@@ -7,6 +7,7 @@
 		Inner application has started....<br/>
 		Message: <div id="placeholder"></div>
 		<input type="button" value="SendUrl" text="SendUrl" onclick="SendUrl()" />
+		<input id="urlToSend"type="text" value="https://northplains.com"  placeholder="Url to send.." text="SendUrl" />
 		<br/><br/>
 		<div style="text-align:right">
 			<div style="display:inline-block; height:25px; width:15%; margin: 0 auto;">
@@ -23,15 +24,15 @@
 			function SendUrl(){
 				// Setting message object
 				var url = new Object();
-				//url.url = 'http://localhost:8090/cross/Receiver.html';
-				url.url = 'https://northplains.com';
+				//url.url = 'http://localhost:8090/cross/Receiver.html';				
+				url.url = document.getElementById('urlToSend').value;
 				message.id = 'Prefs';
 				message.data = url;
 
 				var txtMessage = JSON.stringify(message);
 				console.log('Sending Preferences Url: ' + txtMessage);
 				//window.top.postMessage([{channel: 'Preferences', message: txtMessage}], 'http://localhost');
-				window.top.postMessage([{channel: 'Preferences', message: txtMessage}], '*');
+				//window.top.postMessage([{channel: 'Preferences', message: txtMessage}], '*');
 			}
 			
 			function SendCloseUrl(){
