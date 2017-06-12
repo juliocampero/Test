@@ -30,7 +30,7 @@
 
 				var txtMessage = JSON.stringify(message);
 				console.log('Sending Preferences Url: ' + txtMessage);				
-				window.top.postMessage([{channel: 'Preferences', message: txtMessage}], '*');
+				window.top.postMessage([{channel: 'preferences', message: txtMessage}], '*');
 			}
 			
 			function SendCloseUrl(){
