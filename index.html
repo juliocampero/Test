@@ -1,7 +1,7 @@
 <html>
 	<body>
-	    Inner application has started....<br/>
-	    Message: <div id="placeholder"></div>
+		Inner application has started....<br/>
+		Message: <div id="placeholder"></div>
 		<input type="button" value="SendUrl" text="SendUrl" onclick="SendUrl()" />
 		<br/><br/>
 		<div style="text-align:right">
@@ -9,37 +9,37 @@
 				<input type="button" value="save" text="save" onclick="SendCloseUrl()" />
 				<input type="button" value="cancel" text="cancel" onclick="SendCloseUrl()" />
 			</div>
-	    	</div>
+		</div>
 		<script>
 			var message = new Object;		
 			//var commObject = new Object();
 			//commObject.channel = 'Preferences';
 			//commObject.message = message;
-
+			
 			function SendUrl(){
 				// Setting message object
 				var url = new Object();
-				//url.url = 'http://localhost:8090/cross/Receiver.html';
-				url.url = 'https://northplains.com';
+				url.url = 'http://localhost:8090/cross/Receiver.html';
 				message.id = 'Prefs';
 				message.data = url;
 
 				var txtMessage = JSON.stringify(message);
 				console.log('Sending Preferences Url: ' + txtMessage);
-				window.top.postMessage([{channel: 'Preferences', message: txtMessage}], 'http://localhost');
-		}
-
+				//window.top.postMessage([{channel: 'Preferences', message: txtMessage}], 'http://localhost');
+				window.top.postMessage([{channel: 'Preferences', message: txtMessage}], '*');
+			}
+			
 			function SendCloseUrl(){
 				// Setting close message object
 				var txtMessage = JSON.stringify(message);
 				console.log('Sending Save');
-				window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], 'http://localhost');
-		}
-
-		window.addEventListener("message", function (event) {
-		    document.getElementById('placeholder').innerHTML = JSON.stringify(event.data[0]);
+				//window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], 'http://localhost');
+				window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], '*');
+			}
+			
+			window.addEventListener("message", function (event) {
+				document.getElementById('placeholder').innerHTML = JSON.stringify(event.data[0]);
 				}, false);
 		</script>
-
 	</body>
 </html>
