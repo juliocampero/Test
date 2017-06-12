@@ -1,68 +1,45 @@
 <html>
-	<header>
-		<script>
-			window.onload = function() {
-				console.log(window.frames);
-				console.log(window.frames[0]);
-				
-				// Get a reference to the div on the page that will display the
-				// message text.
-				var messageEle = document.getElementById('message');
-
-				// A function to process messages received by the window.
-				function receiveMessage(e) {
-					// Check to make sure that this message came from the correct domain.
-					/*if (e.origin !== "http://localhost"){
-						return;
-					}*/
-
-					// Update the div element to display the message.
-					messageEle.innerHTML = "Message Received: " + e.data;
-					console.log(e);
-				}
-
-				// Setup an event listener that calls receiveMessage() when the window
-				// receives a new MessageEvent.
-				window.addEventListener('message', receiveMessage);
-				
-				
-				
-				
-				var receiver = document.getElementById('receiver').contentWindow;
-
-				    // Get a reference to the 'Send Message' button.
-				    var btn = document.getElementById('send');
-
-				    // A function to handle sending messages.
-				    function sendMessage(e) {
-					// Prevent any default browser behaviour.
-					e.preventDefault();
-
-					// Send a message with the text 'Hello Treehouse!' to the receiver window.
-					//receiver.postMessage('Hello Julito!', 'http://localhost/cross/');
-					    console.log("sending message");
-					    receiver.postMessage('Hello Julito!', 'https://localhost');
-
-				    }
-
-				    // Add an event listener that will execute the sendMessage() function
-				    // when the send button is clicked.
-				    btn.addEventListener('click', sendMessage);
-			}
-		</script>
-	</header>
 	<body>
-		<h1>Receiver Local Window</h1>
-		<p>
-			This document is on the domain: http://localhost/Receiver.html
-		</p>
-		<div id="message"></div>
-		
-		 <p>
-		    <button id="send">Send Message</button>
-		    </p>
-		
-		<iframe id="receiver" src="https://localhost" width="500" height="200">
-		</iframe>
+	    Inner application has started....<br/>
+	    Message: <div id="placeholder"></div>
+		<input type="button" value="SendUrl" text="SendUrl" onclick="SendUrl()" />
+		<br/><br/>
+		<div style="text-align:right">
+			<div style="display:inline-block; height:25px; width:15%; margin: 0 auto;">
+				<input type="button" value="save" text="save" onclick="SendCloseUrl()" />
+				<input type="button" value="cancel" text="cancel" onclick="SendCloseUrl()" />
+			</div>
+	    	</div>
+		<script>
+			var message = new Object;		
+			//var commObject = new Object();
+			//commObject.channel = 'Preferences';
+			//commObject.message = message;
+
+			function SendUrl(){
+				// Setting message object
+				var url = new Object();
+				//url.url = 'http://localhost:8090/cross/Receiver.html';
+				url.url = 'https://northplains.com';
+				message.id = 'Prefs';
+				message.data = url;
+
+				var txtMessage = JSON.stringify(message);
+				console.log('Sending Preferences Url: ' + txtMessage);
+				window.top.postMessage([{channel: 'Preferences', message: txtMessage}], 'http://localhost');
+		}
+
+			function SendCloseUrl(){
+				// Setting close message object
+				var txtMessage = JSON.stringify(message);
+				console.log('Sending Save');
+				window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], 'http://localhost');
+		}
+
+		window.addEventListener("message", function (event) {
+		    document.getElementById('placeholder').innerHTML = JSON.stringify(event.data[0]);
+				}, false);
+		</script>
+
 	</body>
 </html>
