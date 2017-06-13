@@ -35,7 +35,7 @@
 				console.log("Test Teslescope has recieved a message");
 				console.log(event);
 				Materialize.toast('Next is requesting a url for its user settings!!!', 4000);
-				document.getElementById('placeholder').innerHTML = JSON.stringify(event.data[0]);
+				console.log(event, "Next has sent this event!");
 				}, false);
 		</script>
 	</header>
@@ -45,7 +45,9 @@
 		<br/><br/>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>				
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>		
+
+		<h4>Telescope Communication Manager</h4>		
 		 <div class="row">
 			<div class="input-field col s3">
 				<a class="waves-effect waves-light btn" onclick="SendUrl()">SendUrl</a>
@@ -66,7 +68,7 @@
 			top: auto !important;
 			right: auto !important;
 			bottom: 10%;
-			left:7%;
+			left:80%;
 		}
 	</style>
 </html>
