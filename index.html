@@ -16,26 +16,25 @@
 				// Setting message object
 				var url = new Object();				
 				url.url = document.getElementById('urlToSend').value;
-				message.id = 'Prefs';
+				/*message.id = 'Prefs';
 				message.data = url;
 
-				var txtMessage = JSON.stringify(message);
-				console.log('Sending Preferences Url: ' + txtMessage);				
-				window.top.postMessage([{channel: 'preferences', message: txtMessage}], '*');
+				var txtMessage = JSON.stringify(message);*/
+				console.log('Telescope is sending the user preferences');
+				window.top.postMessage([{channel: 'preferences', data: url}], '*');
 			}
 			
 			function SendCloseUrl(){
 				// Setting close message object
 				var txtMessage = JSON.stringify(message);
-				console.log('Sending Save');				
+				console.log('Telescope is closing the user preferences');				
 				window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], '*');
 			}
 			
 			window.addEventListener("message", function (event) {
-				console.log("Test Teslescope has recieved a message");
-				console.log(event);
-				Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
-				console.log(event, "Next has sent this event!");
+				console.log("Next has sent a message to Telescope!");
+				console.log(event, "This is the event");
+				Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');				
 				}, false);
 		</script>
 	</header>
