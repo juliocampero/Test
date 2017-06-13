@@ -34,7 +34,7 @@
 			window.addEventListener("message", function (event) {
 				console.log("Test Teslescope has recieved a message");
 				console.log(event);
-				Materialize.toast('Next is requesting a url for its user settings!!!', 4000);
+				Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
 				console.log(event, "Next has sent this event!");
 				}, false);
 		</script>
@@ -47,18 +47,18 @@
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>		
 
-		<h4>Telescope Communication Manager</h4>		
+		<h4 class="title">Telescope Communication Manager</h4>		
 		 <div class="row">
 			<div class="input-field col s3">
-				<a class="waves-effect waves-light btn" onclick="SendUrl()">SendUrl</a>
+				<a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
 			</div>
-			<div class="input-field col s9">
-				<input id="urlToSend" type="text" value="https://northplains.com"  placeholder="Url to send.." text="SendUrl">
+			<div class="input-field col s9" >
+				<input  id="urlToSend" type="text" value="https://northplains.com"  placeholder="Url to send.." text="SendUrl">
 			</div>
 		</div>		
 		<div class="row">
 			<div class="input-field col s3">				
-				<a class="waves-effect waves-light btn" onclick="SendCloseUrl()">Close modal</a>
+				<a class="waves-effect waves-light btn blue darken-2" onclick="SendCloseUrl()">Close modal</a>
 			</div>
 		</div>
 		
@@ -69,6 +69,16 @@
 			right: auto !important;
 			bottom: 10%;
 			left:80%;
+		}
+
+		.title {
+			color: #7394bf;
+    		text-align: center;
+		}
+
+		.input-field input[type=text]:focus {
+			border-bottom: 1px solid #7394bf;
+			box-shadow: 0 1px 0 0 #7394bf;
 		}
 	</style>
 </html>
