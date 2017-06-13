@@ -21,7 +21,7 @@
 
 				var txtMessage = JSON.stringify(message);*/
 				console.log('Telescope is sending the user preferences');
-				window.top.postMessage([{channel: 'preferences', data: url}], '*');
+				window.top.postMessage([{channel: 'preferences', data: document.getElementById('urlToSend').value}], '*');
 			}
 			
 			function SendCloseUrl(){
