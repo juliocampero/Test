@@ -14,14 +14,14 @@
 			
 			function SendUrl(){
 				// Setting message object
-				var url = new Object();				
-				url.url = document.getElementById('urlToSend').value;
+				//var url = new Object();				
+				//url.url = document.getElementById('urlToSend').value;
 				/*message.id = 'Prefs';
 				message.data = url;
 
 				var txtMessage = JSON.stringify(message);*/
 				console.log('Telescope is sending the user preferences');
-				window.top.postMessage([{channel: 'preferences', data: document.getElementById('urlToSend').value}], '*');
+				window.top.postMessage([{channel: 'preferences', message: document.getElementById('urlToSend').value}], '*');
 			}
 			
 			function SendCloseUrl(){
