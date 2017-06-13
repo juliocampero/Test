@@ -4,7 +4,6 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
 		<!-- Compiled and minified JavaScript -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 		<script>
 			var message = new Object;		
@@ -21,7 +20,7 @@
 
 				var txtMessage = JSON.stringify(message);
 				console.log('Sending Preferences Url: ' + txtMessage);				
-				window.top.postMessage([{channel: 'Preferences', message: txtMessage}], '*');
+				window.top.postMessage([{channel: 'preferences', message: txtMessage}], '*');
 			}
 			
 			function SendCloseUrl(){
@@ -48,16 +47,24 @@
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>			
 		Message: <div id="placeholder"></div>		
 		 <div class="row">
-			<div class="input-field col s1">
+			<div class="input-field col s3">
 				<a class="waves-effect waves-light btn" onclick="SendUrl()">SendUrl</a>
 			</div>
-			<div class="input-field col s9">
+			<div class="input-field col s6">
 				<input id="urlToSend" type="text" value="https://northplains.com"  placeholder="Url to send.." text="SendUrl">
 			</div>
-			<div class="input-field col s2">				
+			<div class="input-field col s3">				
 				<a class="waves-effect waves-light btn" onclick="SendCloseUrl()">Close modal</a>
 			</div>
 		</div>		
 		
 	</body>
+	<style>
+		#toast-container {
+			top: auto !important;
+			right: auto !important;
+			bottom: 10%;
+			left:7%;
+		}
+	</style>
 </html>
