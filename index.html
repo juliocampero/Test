@@ -34,7 +34,11 @@
 			window.addEventListener("message", function (event) {
 				console.log("Next has sent a message to Telescope!");
 				console.log(event, "This is the event");
-				Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');				
+
+				if(event.data[0].channel === 'preferences') {
+					Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
+				} else(event.data[0].channel === 'search')
+					console.log('NEXT is searching ' + event.data[0].message);
 				}, false);
 		</script>
 	</header>
@@ -52,7 +56,7 @@
 				<a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
 			</div>
 			<div class="input-field col s9" >
-				<input  id="urlToSend" type="text" value="https://nodejs.org"  placeholder="Url to send.." text="SendUrl">
+				<input  id="urlToSend" type="text" value="https://northplains.com"  placeholder="Url to send.." text="SendUrl">
 			</div>
 		</div>		
 		<div class="row">
