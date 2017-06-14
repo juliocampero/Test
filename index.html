@@ -7,26 +7,13 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 		<script>
-			var message = new Object;		
-			//var commObject = new Object();
-			//commObject.channel = 'Preferences';
-			//commObject.message = message;
 			
 			function SendUrl(){
-				// Setting message object
-				//var url = new Object();				
-				//url.url = document.getElementById('urlToSend').value;
-				/*message.id = 'Prefs';
-				message.data = url;
-
-				var txtMessage = JSON.stringify(message);*/
 				console.log('Telescope is sending the user preferences');
 				window.top.postMessage([{channel: 'preferences', message: document.getElementById('urlToSend').value}], '*');
 			}
 			
 			function SendCloseUrl(){
-				// Setting close message object
-				var txtMessage = JSON.stringify(message);
 				console.log('Telescope is closing the user preferences');				
 				window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], '*');
 			}
