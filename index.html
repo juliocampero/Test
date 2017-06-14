@@ -7,6 +7,9 @@
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 		<script>
+			$(document).ready(function() {
+				$("#query").text("This is a placeholder for search query, try searching something from Next!");
+			})
 			
 			function SendUrl(){
 				console.log('Telescope is sending the user preferences');
@@ -26,6 +29,7 @@
 					Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
 				} else if(event.data[0].channel === 'search')
 					console.log('NEXT is searching ' + event.data[0].message);
+					$("#query").text(event.data[0].message);
 				}, false);
 		</script>
 	</header>
@@ -35,9 +39,13 @@
 		<br/><br/>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>		
+		<br/><br/><br/><br/><br/><br/><br/>		
 
 		<h4 class="title">Telescope Communication Manager</h4>		
+		<div class="row">
+			<p class="search col s2">Search query: </p>
+			<p id="query" class="search col s10"></p>		
+		</div>		
 		 <div class="row">
 			<div class="input-field col s3">
 				<a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
@@ -50,8 +58,7 @@
 			<div class="input-field col s3">				
 				<a class="waves-effect waves-light btn blue darken-2" onclick="SendCloseUrl()">Close modal</a>
 			</div>
-		</div>
-		
+		</div>		
 	</body>
 	<style>
 		#toast-container {
@@ -64,6 +71,12 @@
 		.title {
 			color: #7394bf;
     		text-align: center;
+		}
+
+		.search {
+			color: #7394bf;
+    		text-align: left;
+			margin-left: 20px;
 		}
 
 		.input-field input[type=text]:focus {
