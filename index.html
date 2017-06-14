@@ -1,87 +1,85 @@
 <html>
-	<header>
-		<!-- Compiled and minified CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+<header>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
-		<!-- Compiled and minified JavaScript -->
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-		<script>
-			$(document).ready(function() {
-				$("#query").text("This is a placeholder for search query, try searching something from Next!");
-			})
-			
-			function SendUrl(){
-				console.log('Telescope is sending the user preferences');
-				window.top.postMessage([{channel: 'preferences', message: document.getElementById('urlToSend').value}], '*');
-			}
-			
-			function SendCloseUrl(){
-				console.log('Telescope is closing the user preferences');				
-				window.top.postMessage([{channel: 'closeUsrPrefs', message: ''}], '*');
-			}
-			
-			window.addEventListener("message", function (event) {
-				console.log("Next has sent a message to Telescope!");
-				console.log(event, "This is the event");
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#query").text("This is a placeholder for search query, try searching something from Next!");
+        })
 
-				if(event.data[0].channel === 'preferences') {
-					Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
-				} else if(event.data[0].channel === 'search')
-					console.log('NEXT is searching ' + event.data[0].message);
-					$("#query").text(event.data[0].message);
-				}, false);
-		</script>
-	</header>
+        function SendUrl() {
+            console.log('Telescope is sending the user preferences');
+            window.top.postMessage([{ channel: 'preferences', message: document.getElementById('urlToSend').value }], '*');
+        }
 
-	
-	<body>
-		<br/><br/>
-		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-		<br/><br/><br/><br/><br/><br/><br/>		
+        function SendCloseUrl() {
+            console.log('Telescope is closing the user preferences');
+            window.top.postMessage([{ channel: 'closeUsrPrefs', message: '' }], '*');
+        }
 
-		<h4 class="title">Telescope Communication Manager</h4>		
-		<div class="row">
-			<p class="search col s2">Search query: </p>
-			<p id="query" class="search col s10"></p>		
-		</div>		
-		 <div class="row">
-			<div class="input-field col s3">
-				<a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
-			</div>
-			<div class="input-field col s9" >
-				<input  id="urlToSend" type="text" value="https://northplains.com"  placeholder="Url to send.." text="SendUrl">
-			</div>
-		</div>		
-		<div class="row">
-			<div class="input-field col s3">				
-				<a class="waves-effect waves-light btn blue darken-2" onclick="SendCloseUrl()">Close modal</a>
-			</div>
-		</div>		
-	</body>
-	<style>
+        window.addEventListener("message", function (event) {
+            console.log("Next has sent a message to Telescope!");
+            console.log(event, "This is the event");
+            if (event.data[0].channel === 'preferences') {
+                Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
+            } else if (event.data[0].channel === 'search') {
+                console.log('NEXT is searching ' + event.data[0].message);
+                $("#query").text(event.data[0].message);
+            }
+        }, false);
+    </script>
+</header>
+
+
+<body>
+    <br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/>
+
+    <h4 class="title">Telescope Communication Manager</h4>
+    <div class="row">
+        <p class="search col s2">Search query: </p>
+        <p id="query" class="search col s10"></p>
+    </div>
+    <div class="row">
+        <div class="input-field col s3">
+            <a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
+</div>
+<div class="input-field col s9">
+    <input id="urlToSend" type="text" value="https://northplains.com" placeholder="Url to send.." text="SendUrl">
+</div>
+</div>
+<div class="row">
+    <div class="input-field col s3">
+        <a class="waves-effect waves-light btn blue darken-2" onclick="SendCloseUrl()">Close modal</a>
+</div>
+</div>
+</body>
+<style>
 		#toast-container {
 			top: auto !important;
 			right: auto !important;
 			bottom: 10%;
 			left:75%;
 		}
-
 		.title {
 			color: #7394bf;
     		text-align: center;
 		}
-
 		.search {
 			color: #7394bf;
     		text-align: left;
 			margin-left: 20px;
 		}
-
 		.input-field input[type=text]:focus {
 			border-bottom: 1px solid #7394bf;
 			box-shadow: 0 1px 0 0 #7394bf;
 		}
 	</style>
+
 </html>
