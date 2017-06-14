@@ -24,7 +24,7 @@
 
 				if(event.data[0].channel === 'preferences') {
 					Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
-				} else(event.data[0].channel === 'search')
+				} else if(event.data[0].channel === 'search')
 					console.log('NEXT is searching ' + event.data[0].message);
 				}, false);
 		</script>
