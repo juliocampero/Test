@@ -7,79 +7,116 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
     <script>
+		var channelPref = 'preferences';
+		var channelClose = 'closeUsrPrefs';
+		var channelReSize = 'resizeUsrPrefs';
+		var channelSearch = 'search';
+		
         $(document).ready(function () {
             $("#query").text("This is a placeholder for search query, try searching something from Next!");
         })
 
         function SendUrl() {
             console.log('Telescope is sending the user preferences');
-            window.top.postMessage([{ channel: 'preferences', message: document.getElementById('urlToSend').value }], '*');
+			var sendMessage = document.getElementById('urlToSend').value;			
+            window.top.postMessage([{ channel: channelPref, message: sendMessage }], '*');
         }
 
         function SendCloseUrl() {
-            console.log('Telescope is closing the user preferences');
-            window.top.postMessage([{ channel: 'closeUsrPrefs', message: '' }], '*');
+            console.log('Telescope is closing the user preferences');			
+            window.top.postMessage([{ channel: channelClose, message: '' }], '*');
+        }
+		
+		function SendReSize() {
+            console.log('Telescope is sending the size of the preferences modal');
+			var heightSize = document.getElementById('modalWidth').value;
+			var widthSize = document.getElementById('modalHeight').value;			
+			window.top.postMessage([{ channel: channelReSize, message: {width: widthSize, height: heightSize}}], '*');
         }
 
         window.addEventListener("message", function (event) {
             console.log("Next has sent a message to Telescope!");
             console.log(event, "This is the event");
-            if (event.data[0].channel === 'preferences') {
+            
+			if (event.data[0].channel === channelPref) {
                 Materialize.toast('Next is requesting a url for its user settings!!!', 5000, 'rounded');
-            } else if (event.data[0].channel === 'search') {
+				return;
+            }
+			
+			if (event.data[0].channel === channelSearch) {
                 console.log('NEXT is searching ' + event.data[0].message);
                 $("#query").text(event.data[0].message);
-            }
+				return;
+            }			
         }, false);
     </script>
 </header>
-
-
 <body>
-    <br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/>
-
-    <h4 class="title">Telescope Communication Manager</h4>
-    <div class="row">
-        <p class="search col s2">Search query: </p>
-        <p id="query" class="search col s10"></p>
-    </div>
-    <div class="row">
-        <div class="input-field col s3">
-            <a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
-</div>
-<div class="input-field col s9">
-    <input id="urlToSend" type="text" value="https://northplains.com" placeholder="Url to send.." text="SendUrl">
-</div>
-</div>
-<div class="row">
-    <div class="input-field col s3">
-        <a class="waves-effect waves-light btn blue darken-2" onclick="SendCloseUrl()">Close modal</a>
-</div>
-</div>
+	<div class="main">
+		<div class="bottom">
+			<h4 class="title">Telescope Communication Manager</h4>
+			<div class="row">
+				<p class="search col s2">Search query: </p>
+				<p id="query" class="search col s10"></p>
+			</div>
+			<div class="row">
+				<div class="input-field col s3">
+					<a class="waves-effect waves-light btn blue darken-2" onclick="SendUrl()">SendUrl</a>
+				</div>				
+				<div class="input-field col s9">
+					<input id="urlToSend" type="text" value="https://northplains.com" placeholder="Url to send.." text="SendUrl">
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s3">
+					<a class="waves-effect waves-light btn blue darken-2" onclick="SendCloseUrl()">Close modal</a>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="input-field col s3">
+					<a class="waves-effect waves-light btn blue darken-2" onclick="SendReSize()">Size modal</a>
+				</div>
+				<div class="input-field col s3">
+					Width
+					<input id="modalWidth" type="text" value="830" placeholder="Size in px..." text="830">
+				</div>
+				<div class="input-field col s3">
+					Height
+					<input id="modalHeight" type="text" value="510" placeholder="Size in px..." text="510">
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <style>
-		#toast-container {
-			top: auto !important;
-			right: auto !important;
-			bottom: 10%;
-			left:75%;
-		}
-		.title {
-			color: #7394bf;
-    		text-align: center;
-		}
-		.search {
-			color: #7394bf;
-    		text-align: left;
-			margin-left: 20px;
-		}
-		.input-field input[type=text]:focus {
-			border-bottom: 1px solid #7394bf;
-			box-shadow: 0 1px 0 0 #7394bf;
-		}
-	</style>
+	.main {
+		position: relative; 
+		height: 100%; 
+	}
+	.bottom {
+		position: absolute; 
+		bottom: 0; 
+		width: 100%; 
+	}
+	#toast-container {
+		top: auto !important;
+		right: auto !important;
+		bottom: 10%;
+		left:75%;
+	}
+	.title {
+		color: #7394bf;
+		text-align: center;
+	}
+	.search {
+		color: #7394bf;
+		text-align: left;
+		margin-left: 20px;
+	}
+	.input-field input[type=text]:focus {
+		border-bottom: 1px solid #7394bf;
+		box-shadow: 0 1px 0 0 #7394bf;
+	}
+</style>
 
 </html>
