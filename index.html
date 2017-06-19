@@ -29,8 +29,8 @@
 		
 		function SendReSize() {
             console.log('Telescope is sending the size of the preferences modal');
-			var heightSize = document.getElementById('modalWidth').value;
-			var widthSize = document.getElementById('modalHeight').value;			
+			var heightSize = document.getElementById('modalHeight').value;
+			var widthSize = document.getElementById('modalWidth').value;
 			window.top.postMessage([{ channel: channelReSize, message: {width: widthSize, height: heightSize}}], '*');
         }
 
